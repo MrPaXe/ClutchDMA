@@ -1,3 +1,6 @@
+v2.03[17.05.2022]
+- renamed dmaStuff to pcileech
+
 v2.02[03.02.2022]
 - renamed v2.txt to changelog.txt
 - changed copy command in main flash.bat to xcopy because copy was corrupting the firmware file.
