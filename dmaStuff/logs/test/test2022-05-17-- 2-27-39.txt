@@ -1,0 +1,3 @@
+
+DEVICE: FPGA: ERROR: Unable to connect to USB/FT601 device [0,v0.0,0000]
+PCILEECH: Failed to connect to the device.

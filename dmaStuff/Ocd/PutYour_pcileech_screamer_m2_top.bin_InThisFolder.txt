@@ -1,1 +1,0 @@
-Copy your pcileech_screamer_m2_top.bin in this folder and run flash.bat

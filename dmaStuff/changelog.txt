@@ -1,5 +1,11 @@
 v2.03[17.05.2022]
-- renamed TestFiles to pcileech
+- renamed TestFiles to pcileech. test.bat updated accordingly.
+- added option to choose between the available dma cards (Screamer r03/r04/m2, Screamer Squirrel).
+- changed wording and typos in test.bat.
+- removed flashOld and old .cfg files from OCD.
+- fixed lots of stuff
+- added general dma.bat that summarizes test, flash, speedtest.
+- fixed flash.bat only finding firmware files in english systems.
 
 v2.02[03.02.2022]
 - renamed v2.txt to changelog.txt
