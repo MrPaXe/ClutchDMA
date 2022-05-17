@@ -59,47 +59,15 @@ echo [1] Sreamer R03, R04 PCIe, R04 M2
 echo [2] Screamer Squirrel
 echo.
 
-::set /p ScreamerChoice=Please select which DMA Card you have: 
+set /p ScreamerChoice=Please select which DMA Card you have: 
 
-::if %ScreamerChoice%==1 set cfgName="flash_screamer_r03_r04.cfg"
-::if %ScreamerChoice%==2 set cfgName="flash_screamer_squirrel.cfg"
+if %ScreamerChoice%==1 set cfgName="flash_screamer_r03_r04.cfg"
+if %ScreamerChoice%==2 set cfgName="flash_screamer_squirrel.cfg"
+if %ScreamerChoice%==9 set cfgName="pid0x0403_0x6011.cfg"
 
 cd .\Ocd\
-openocd.exe -f "pid0x0403_0x6011.cfg" 2> pid6011tmpfile
-type pid6010tmpfile | find "Error: unable to open ftdi device with vid 0403, pid 6011" 
-
-if ERRORLEVEL 0 (
-	echo.
-	echo Unable to find device with pid 6011.
-	echo.
-) ELSE (
-	echo.
-	echo type pid6011tmpfile
-	echo.
-	del pid6011tmpfile
-	pause
-	exit
-)
-
-openocd.exe -f "pid0x0403_0x6010.cfg" 2> tmpfile
-type pid6010tmpfile | find "Error: unable to open ftdi device with vid 0403, pid 6010" 
-
-if ERRORLEVEL 0 (
-	echo.
-	echo Unable to find device with pid 6011 and 6010.
-	echo Looking for pid 6011
-	del pid6010tmpfile
-	echo.
-) ELSE (
-	echo.
-	echo type pid6010tmpfile
-	echo.
-	del pid6010tmpfile
-	pause
-	exit
-)
-
-
+openocd.exe -f %cfgName%
+echo.
 
 
 pause
