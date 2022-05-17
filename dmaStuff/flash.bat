@@ -18,7 +18,7 @@ if %i% EQU %x% (
 	echo.
 	echo Error while looking for firmware file.
 	echo Most likely no firmware file or multiple .bin files were found.
-	echo Please make sure that there is only one firmware file next to the flash.bat.
+	echo Please make sure that there is only one firmware file next to the dma.bat.
 	echo It needs to be a .bin file.
 	echo.
 	pause
