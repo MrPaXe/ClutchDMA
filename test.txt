@@ -1,0 +1,5 @@
+Open On-Chip Debugger 0.10.0+dev-01289-g8833c889 (2020-06-26-21:35)
+Licensed under GNU GPL v2
+For bug reports, read
+	http://openocd.org/doc/doxygen/bugs.html
+openocd: option requires an argument -- f
