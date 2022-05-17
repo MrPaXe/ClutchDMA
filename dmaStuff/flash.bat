@@ -1,7 +1,7 @@
 @echo off
 
 cd /D %~dp0
-set filename="%~dp0logs\flash\flash%date:~-4%-%date:~-7,2%-%date:~-10,2%--%time:~-11,2%-%time:~-8,2%-%time:~-5,2%.txt"
+::set filename="%~dp0logs\flash\flash%date:~-4%-%date:~-7,2%-%date:~-10,2%--%time:~-11,2%-%time:~-8,2%-%time:~-5,2%.txt"
 
 set x=1
 set i=0
@@ -65,11 +65,8 @@ if %ScreamerChoice%==1 set cfgName="flash_screamer_r03_r04.cfg"
 if %ScreamerChoice%==2 set cfgName="flash_screamer_squirrel.cfg"
 
 cd .\Ocd\
-openocd.exe -f %cfgName% > %filename%
-type %filename%
-
+openocd.exe -f %cfgName%
 echo.
-echo Log saved to %filename%
 
 pause
 exit

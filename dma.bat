@@ -1,7 +1,6 @@
 @echo off
 
 cd /D %~dp0
-set filename="%~dp0logs\test\test%date:~-4%-%date:~-7,2%-%date:~-10,2%--%time:~-11,2%-%time:~-8,2%-%time:~-5,2%.txt"
 
 net session >NUL
 if errorlevel 1 goto runAs

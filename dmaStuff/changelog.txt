@@ -1,3 +1,6 @@
+v2.04[18.05.2022]
+- removed "filename" variable and logging.
+
 v2.03[17.05.2022]
 - renamed TestFiles to pcileech. test.bat updated accordingly.
 - added option to choose between the available dma cards (Screamer r03/r04/m2, Screamer Squirrel).
