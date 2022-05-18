@@ -1,6 +1,6 @@
 @echo off
 
-set ver="2.05"
+set ver="2.06"
 cd /D %~dp0
 
 del ver.txt >Nul
