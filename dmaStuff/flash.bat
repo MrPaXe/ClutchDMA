@@ -38,6 +38,7 @@ cls
 :decision
 
 set /p flash=Are you sure that you want to flash your DMA Device? [Y/N] 
+IF NOT DEFINED flash SET "flash=Y"
 
 if /I %flash%==Y goto flash
 if /I %flash%==YES goto flash
@@ -55,20 +56,11 @@ goto decision
 :flash
 cls
 
-echo [1] Sreamer R03, R04 PCIe, R04 M2
-echo [2] Screamer Squirrel
-echo.
-
-set /p ScreamerChoice=Please select which DMA Card you have: 
-
-if %ScreamerChoice%==1 set cfgName="flash_screamer_r03_r04.cfg"
-if %ScreamerChoice%==2 set cfgName="flash_screamer_squirrel.cfg"
-if %ScreamerChoice%==9 set cfgName="pid0x0403_0x6011.cfg"
+set cfgName=pid0x0403_0x6011.cfg
 
 cd .\Ocd\
 openocd.exe -f %cfgName%
 echo.
-
 
 pause
 exit

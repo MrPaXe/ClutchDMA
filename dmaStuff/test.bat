@@ -55,7 +55,7 @@ echo Starting pcileech test.
 echo.
 
 cd .\pcileech\
-pcileech.exe -v -device fpga -min 0x100000 display 1> "C:\Users\Philipp\OneDrive\Dokumente\GitHub\ClutchDMA\test.txt"
+pcileech.exe -v -device fpga -min 0x100000 display
 
 
 echo.

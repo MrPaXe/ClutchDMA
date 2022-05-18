@@ -12,5 +12,6 @@ tar -xf dma.zip
 del dma.zip
 
 cls
+start .
 start .\dma.bat -v runAs
 del ..\ClutchDMA.bat
