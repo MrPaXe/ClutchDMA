@@ -10,6 +10,14 @@ goto startLoop
 powershell "start dma.bat -v runAs"
 exit
 
+:autoUpdate
+echo.
+echo Checking for updated ClutchDMA version...
+echo.
+
+
+
+
 :startLoop
 cls
 
