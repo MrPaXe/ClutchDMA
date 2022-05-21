@@ -1,7 +1,6 @@
 @echo off
 
 cd /D %~dp0
-::set filename="%~dp0logs\test\test%date:~-4%-%date:~-7,2%-%date:~-10,2%--%time:~-11,2%-%time:~-8,2%-%time:~-5,2%.txt"
 
 net session >NUL
 if errorlevel 1 goto runAs
@@ -33,7 +32,7 @@ for /f %%f in ('dir /b .\Dllpatch\System32') do (
 	) ELSE (
 		copy .\Dllpatch\System32\%%f C:\Windows\System32\
 		if ERRORLEVEL 1 (
-			echo Failed to copy %%f , please insert manually.
+			echo Failed to copy %%f from Dllpatch\System32, please insert manually.
 		) ELSE (
 			echo %%f Successfully copied.
 		)
@@ -41,13 +40,18 @@ for /f %%f in ('dir /b .\Dllpatch\System32') do (
 )
 
 for /f %%f in ('dir /b .\Dllpatch\SysWOW64') do (
-	IF EXIST C:\Windows\System32\%%f (
-		echo %%f exists
+	IF EXIST C:\Windows\SysWOW64\%%f (
+		echo %%f already exists.
 	) ELSE (
-		copy .\Dllpatch\System32\%%f C:\Windows\System32\
-		if ERRORLEVEL 1 echo Failed to copy %%f , please insert manually.
+		copy .\Dllpatch\SysWOW64\%%f C:\Windows\SysWOW64\
+		if ERRORLEVEL 1 (
+			echo Failed to copy %%f from Dllpatch\SysWOW64, please insert manually.
+		) ELSE (
+			echo %%f Successfully copied.
+		)
 	)
 )
+
 
 ::actual test
 echo.
@@ -55,10 +59,80 @@ echo Starting pcileech test.
 echo.
 
 cd .\pcileech\
-pcileech.exe -v -device fpga -min 0x100000 display
+pcileech.exe -v -device fpga -min 0x100000 display 1> ..\testResult.tmp
+cd ..\
 
+type .\testResult.tmp
+echo.
+
+::check for test results
+
+find /c "DEVICE: FPGA: ERROR: Unable to connect to USB/FT601 device [0,v0.0,0000]" .\testResult.tmp >Nul
+if ERRORLEVEL 1 (
+	echo.
+) ELSE (
+	del .\testResult.tmp
+	echo.
+	echo No USB Connection to DMA Device! 
+	echo Make sure that the USB is plugged in the DATA USB-Port.
+	echo Try changing the USB-Port on the Radar-PC.
+	echo.
+	echo.
+	
+	pause
+	exit
+)
+	
+find /c "Memory Display: Failed reading memory at address: " .\testResult.tmp >Nul
+if ERRORLEVEL 1 (
+	echo.
+) ELSE (
+	del .\testResult.tmp
+	goto tinytestCheck
+)
+
+find /c "Memory Display: Contents for address: " .\testResult.tmp >Nul
+if ERRORLEVEL 1 (
+	echo.
+) ELSE (
+	del .\testResult.tmp
+	echo.
+	echo Good test result!
+	echo Good test result!
+	echo Good test result!
+	echo.
+	echo.
+	
+	pause
+	exit
+)
+
+del .\testResult.tmp
+echo.
+echo Test results unkown. Please validate yourself or contact support staff on the Clutch-Solution discord.
+echo Test results unkown. Please validate yourself or contact support staff on the Clutch-Solution discord.
+echo Test results unkown. Please validate yourself or contact support staff on the Clutch-Solution discord.
+echo.
+echo.
+pause
+
+
+:tinytestCheck
+set /p tinytestCheck=BAD TEST: Try tiny test? [Y/N] 
+IF NOT DEFINED tinytestCheck SET "tinytestCheck=Y"
+
+if /I %tinytestCheck%==Y start tinytest.bat -v runAs
+if /I %tinytestCheck%==YES start tinytest.bat -v runAs
+
+if /I %flash%==N exit
+if /I %flash%==NO exit
 
 echo.
+echo.
+echo Invlaid entry please enter "YES" or "NO". Your entry was "%flash%"
+echo.
+goto tinytestCheck
+
 
 :end
 pause
