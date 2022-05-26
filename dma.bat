@@ -22,6 +22,14 @@ echo Checking for updated ClutchDMA version...
 echo.
 
 curl http://clutch.paxe.at/ClutchDMA/ver.txt -J -O
+::check if website down.
+if ERRORLEVEL 1 (
+	echo Update server seems to be down. Please open a Ticket in the Clutch-Soution Discord.
+	del ver.txt
+	pause
+	exit
+)
+
 find /c %ver% .\ver.txt >Nul
 
 if ERRORLEVEL 1 (
@@ -71,5 +79,14 @@ cd /D %~dp0
 del updateHelper.bat
 
 curl -O "http://clutch.paxe.at/ClutchDMA/updateHelper.bat"
+
+::check if website down.
+if ERRORLEVEL 1 (
+	echo Update server seems to be down. Please open a Ticket in the Clutch-Soution Discord.
+	del updateHelper.txt
+	pause
+	exit
+)
+
 start updateHelper.bat
 exit
