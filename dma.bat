@@ -72,3 +72,4 @@ del updateHelper.bat
 
 curl -O "http://clutch.paxe.at/ClutchDMA/updateHelper.bat"
 start updateHelper.bat
+exit
