@@ -77,10 +77,14 @@ echo.
 echo Advanced Menu
 echo.
 echo [1] Test with automapping
-echo [2] Test with manual map
+echo [2] Test with manual map (mmap.txt needs to be placed next to dma.bat)
 echo.
 echo [3] Speedtest with automapping
-echo [4] Speedtest with manual map
+echo [4] Speedtest with manual map (mmap.txt needs to be placed next to dma.bat)
+echo.
+echo [5] Tiny test (algo=3) with no map.
+echo [6] Tiny test (algo=3) with automapping
+echo [7] Tiny test (algo=3) with manual map (mmap.txt needs to be placed next to dma.bat)
 echo.
 echo [8] Update ClutchDMA files.
 echo [9] Go back.
@@ -93,8 +97,14 @@ cd .\dmaStuff\
 
 if %choice%==1 start test.bat autoMap -v runAs
 if %choice%==2 start test.bat manualMap -v runAs
+
 if %choice%==3 start speedtest.bat autoMap -v runAs
 if %choice%==4 start speedtest.bat manualMap -v runAs
+
+if %choice%==5 start tinytest.bat noMap -v runAs
+if %choice%==6 start tinytest.bat autoMap -v runAs
+if %choice%==7 start tinytest.bat manualMap -v runAs
+
 if %choice%==8 goto update
 if %choice%==9 goto menuLoop
 if %choice%==0 exit
