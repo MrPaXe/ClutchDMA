@@ -24,6 +24,9 @@ cd .\pcileech\
 pcileech.exe -v -device fpga -memmap auto -min 0x100000 display 1> ..\testResult.tmp
 cd ..\
 
+echo %errorlevel%
+pause
+
 type .\testResult.tmp
 echo.
 
@@ -69,11 +72,13 @@ if ERRORLEVEL 1 (
 	exit
 )
 
-del .\testResult.tmp
+
 echo.
 echo Test results unkown. Please validate yourself or contact support staff on the Clutch-Solution discord.
 echo Test results unkown. Please validate yourself or contact support staff on the Clutch-Solution discord.
 echo Test results unkown. Please validate yourself or contact support staff on the Clutch-Solution discord.
+pause
+del .\testResult.tmp
 echo.
 echo.
 pause
