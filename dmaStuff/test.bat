@@ -12,6 +12,10 @@ exit
 
 :main
 
+::passing args
+set mappingMode=%1
+
+
 call %~dp0ftdDriverInstall.bat
 call %~dp0dllPatch.bat
 
@@ -21,11 +25,19 @@ echo Starting pcileech test.
 echo.
 
 cd .\pcileech\
-pcileech.exe -v -device fpga -memmap auto -min 0x100000 display 1> ..\testResult.tmp
-cd ..\
 
-echo %errorlevel%
-pause
+if %mappingMode% == noMap (
+	pcileech.exe -v -device fpga -min 0x100000 display 1> ..\testResult.tmp
+) 
+if %mappingMode% == autoMap (
+	pcileech.exe -v -device fpga -memmap auto -min 0x100000 display 1> ..\testResult.tmp
+)
+if %mappingMode% == manualMap (
+	pcileech.exe -v -device fpga -memmap ..\..\mmap.txt -min 0x100000 display 1> ..\testResult.tmp
+)
+
+
+cd ..\
 
 type .\testResult.tmp
 echo.
@@ -67,17 +79,15 @@ if ERRORLEVEL 1 (
 	echo Good test result!
 	echo.
 	echo.
-	
 	pause
 	exit
 )
 
 
 echo.
-echo Test results unkown. Please validate yourself or contact support staff on the Clutch-Solution discord.
-echo Test results unkown. Please validate yourself or contact support staff on the Clutch-Solution discord.
-echo Test results unkown. Please validate yourself or contact support staff on the Clutch-Solution discord.
-pause
+echo Test results unkown. Please validate the results yourself or contact support staff on the Clutch-Solution discord.
+echo Test results unkown. Please validate the results yourself or contact support staff on the Clutch-Solution discord.
+echo Test results unkown. Please validate the results yourself or contact support staff on the Clutch-Solution discord.
 del .\testResult.tmp
 echo.
 echo.
@@ -88,8 +98,8 @@ pause
 set /p tinytestCheck=BAD TEST: Try tiny test? [Y/N] 
 IF NOT DEFINED tinytestCheck SET "tinytestCheck=Y"
 
-if /I %tinytestCheck%==Y start tinytest.bat -v runAs
-if /I %tinytestCheck%==YES start tinytest.bat -v runAs
+if /I %tinytestCheck%==Y start tinytest.bat %mappingMode% -v runAs
+if /I %tinytestCheck%==YES start tinytest.bat %mappingMode% -v runAs
 
 if /I %flash%==N exit
 if /I %flash%==NO exit
