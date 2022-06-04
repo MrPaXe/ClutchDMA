@@ -16,8 +16,8 @@ exit
 set mappingMode=%1
 
 
-call %~dp0ftdDriverInstall.bat
-call %~dp0dllPatch.bat
+call ftdDriverInstall.bat
+call dllPatch.bat
 
 ::actual test
 echo.
@@ -68,6 +68,21 @@ if ERRORLEVEL 1 (
 	goto tinytestCheck
 )
 
+find /c "Invalid memory map: " .\testResult.tmp >Nul
+if ERRORLEVEL 1 (
+	echo.
+) ELSE (
+	del .\testResult.tmp
+	echo. 
+	echo Invalid or missing memory map!
+	echo Invalid or missing memory map!
+	echo Invalid or missing memory map!
+	echo.
+	echo.
+	pause
+	exit
+)
+
 find /c "Memory Display: Contents for address: " .\testResult.tmp >Nul
 if ERRORLEVEL 1 (
 	echo.
@@ -101,15 +116,7 @@ IF NOT DEFINED tinytestCheck SET "tinytestCheck=Y"
 if /I %tinytestCheck%==Y start tinytest.bat %mappingMode% -v runAs
 if /I %tinytestCheck%==YES start tinytest.bat %mappingMode% -v runAs
 
-if /I %flash%==N exit
-if /I %flash%==NO exit
-
-echo.
-echo.
-echo Invlaid entry please enter "YES" or "NO". Your entry was "%flash%"
-echo.
-goto tinytestCheck
-
+exit
 
 :end
 pause
