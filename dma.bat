@@ -1,6 +1,6 @@
 @echo off
 
-set ver="2.08"
+set ver="2.09"
 cd /D %~dp0
 
 del ver.txt >Nul
@@ -61,7 +61,7 @@ cd .\dmaStuff\
 
 if %choice%==1 start test.bat noMap -v runAs
 if %choice%==2 start flash.bat -v runAs
-if %choice%==3 start speedtest noMap.bat -v runAs
+if %choice%==3 start speedtest.bat noMap -v runAs
 if %choice%==9 goto advancedMenu
 if %choice%==0 exit
 
