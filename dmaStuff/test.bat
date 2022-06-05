@@ -28,15 +28,27 @@ cd .\pcileech\
 
 if %mappingMode% == noMap (
 	pcileech.exe -v -device fpga -min 0x100000 display 1> ..\testResult.tmp
+	goto testResult
 ) 
 if %mappingMode% == autoMap (
 	pcileech.exe -v -device fpga -memmap auto -min 0x100000 display 1> ..\testResult.tmp
+	goto testResult
 )
 if %mappingMode% == manualMap (
 	pcileech.exe -v -device fpga -memmap ..\..\mmap.txt -min 0x100000 display 1> ..\testResult.tmp
+	goto testResult
 )
 
+echo.
+echo Invalid mapping mode. Contact support on the Clutch-Solution Discord.
+echo Invalid mapping mode. Contact support on the Clutch-Solution Discord.
+echo Invalid mapping mode. Contact support on the Clutch-Solution Discord.
+echo.
+pause
+exit
 
+
+:testResult
 cd ..\
 
 type .\testResult.tmp
