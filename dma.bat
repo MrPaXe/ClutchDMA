@@ -1,13 +1,14 @@
 @echo off
 
 set ver="2.09"
+
 cd /D %~dp0
 
-del ver.txt >Nul
-del updateHelper.bat >Nul
+del ver.txt 1>Nul 2>Nul
+del updateHelper.bat 1>Nul 2>Nul
 
 :adminCheck
-net session >NUL
+openfiles 1>Nul 2>Nul
 if errorlevel 1 goto runAs
 goto autoUpdate
 
