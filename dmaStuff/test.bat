@@ -2,16 +2,7 @@
 
 cd /D %~dp0
 
-net session >NUL
-if errorlevel 1 goto runAs
-goto main
-
-:runAs
-powershell "start test.bat -v runAs"
-exit
-
 :main
-
 ::passing args
 set mappingMode=%1
 
