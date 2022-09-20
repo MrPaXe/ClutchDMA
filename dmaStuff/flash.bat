@@ -75,6 +75,7 @@ openocd.exe -f openocdDefault.cfg
 
 echo.
 pause
+goto eof
 
 :customVID_PID
 cls
