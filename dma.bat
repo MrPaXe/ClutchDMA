@@ -1,6 +1,6 @@
 @echo off
 
-set ver="2.09"
+set ver="2.10"
 
 cd /D %~dp0
 
@@ -61,7 +61,7 @@ set /p choice=What do you want to do:
 cd .\dmaStuff\
 
 if %choice%==1 start test.bat noMap -v runAs
-if %choice%==2 start flash.bat -v runAs
+if %choice%==2 start flash.bat defaultVID_PID -v runAs
 if %choice%==3 start speedtest.bat noMap -v runAs
 if %choice%==9 goto advancedMenu
 if %choice%==0 exit
@@ -87,9 +87,11 @@ echo [5] Tiny test (algo=3) with no map.
 echo [6] Tiny test (algo=3) with automapping
 echo [7] Tiny test (algo=3) with manual map (mmap.txt needs to be placed next to dma.bat)
 echo.
-echo [8] Update ClutchDMA files.
-echo [9] Go back.
-echo [0] Quit
+echo [8] Flash with custom VID ^& PID.
+echo.
+echo [9] Update ClutchDMA files.
+echo [0] Go back.
+echo [Q] Quit
 echo.
 
 set /p choice=What do you want to do: 
@@ -106,15 +108,17 @@ if %choice%==5 start tinytest.bat noMap -v runAs
 if %choice%==6 start tinytest.bat autoMap -v runAs
 if %choice%==7 start tinytest.bat manualMap -v runAs
 
-if %choice%==8 goto update
-if %choice%==9 goto menuLoop
-if %choice%==0 exit
+if %choice%==8 start flash.bat customVID_PID -v runAs
+
+if %choice%==9 goto update
+if %choice%==0 goto menuLoop
+if %choice%=="Q" exit
 
 goto menuLoop
 
 :update
 cls
-set /p updateYN=Do you want to update your CltuchDMA files? (Highly recommended) [Y/N]
+set /p updateYN=Do you want to update your ClutchDMA files? (Highly recommended) [Y/N]
 IF NOT DEFINED updateYN SET "updateYN=Y"
 if /I %updateYN%==N goto menuLoop
 
