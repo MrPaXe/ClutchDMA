@@ -1,6 +1,6 @@
 @echo off
 
-set ver="2.11"
+set ver="2.12"
 
 cd /D %~dp0
 
